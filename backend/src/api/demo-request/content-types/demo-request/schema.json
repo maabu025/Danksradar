@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "demo_requests",
+  "info": {
+    "singularName": "demo-request",
+    "pluralName": "demo-requests",
+    "displayName": "Demo request",
+    "description": "Leads from the Request a demo form"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20
+    },
+    "company": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "fleetSize": {
+      "type": "enumeration",
+      "enum": [
+        "size_1_10",
+        "size_11_50",
+        "size_51_200",
+        "size_200_plus"
+      ],
+      "required": true
+    },
+    "industry": {
+      "type": "string"
+    },
+    "services": {
+      "type": "json"
+    },
+    "preferredDate": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "contacted",
+        "won",
+        "lost"
+      ],
+      "default": "new",
+      "required": true
+    }
+  }
+}

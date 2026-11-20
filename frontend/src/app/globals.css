@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+
+/* Danksradar brand tokens: use them as bg-deep, text-purple, border-lav, etc. */
+@theme {
+  --color-deep: #241446;
+  --color-purple: #8a3ff0;
+  --color-electric: #a259ff;
+  --color-lav: #f3eeff;
+  --color-white: #ffffff;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 30s linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem; /* keeps anchors clear of the sticky nav */
+}
+
+body {
+  @apply bg-white font-sans text-deep antialiased;
+}
+
+/* Shared helpers */
+@utility container-page {
+  @apply mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16;
+}
+
+@utility section {
+  @apply py-20 md:py-32;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* progress bar in the "Why Danksradar" slideshow */
+@keyframes whyus-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}

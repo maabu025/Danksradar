@@ -1,0 +1,16 @@
+# Dependencies and builds (each project also has its own .gitignore)
+node_modules/
+.next/
+dist/
+
+# Secrets: never push these
+.env
+.env.*
+!.env.example
+
+# Windows / editor files
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+*.log
