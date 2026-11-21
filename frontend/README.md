@@ -3,7 +3,7 @@
 The public Danksradar website.
 
 - **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS 4**
-- Runs on **port 3000**
+- Runs on **port 3001**
 - Sends form submissions to the **backend** (Strapi, `NEXT_PUBLIC_API_URL`, default http://localhost:1337)
 
 ## Run it
@@ -16,7 +16,7 @@ cp .env.example .env        # NEXT_PUBLIC_API_URL should point to the backend
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open http://localhost:3001.
 
 ## Folders
 
