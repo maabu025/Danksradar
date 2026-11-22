@@ -2,27 +2,29 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { CtaBand } from '@/components/home/CtaBand'
-import { DeviceGrid } from '@/components/partners/DeviceGrid'
 import { PartnerCard } from '@/components/partners/PartnerCard'
 import { PartnerLogo } from '@/components/partners/PartnerLogo'
+import { PartnerProducts } from '@/components/partners/PartnerProducts'
 import { PartnershipLevel } from '@/components/partners/PartnershipLevel'
-import { getPartner, partners } from '@/data/partners'
-import { products } from '@/data/products'
+import { getPartner, getPartners, getProducts } from '@/lib/content'
 
 type Props = { params: Promise<{ slug: string }> }
 
-export function generateStaticParams() {
-  return partners.map((p) => ({ slug: p.slug }))
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  return (await getPartners()).map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const partner = getPartner((await params).slug)
+  const partner = await getPartner((await params).slug)
   return partner ? { title: partner.name, description: partner.summary } : {}
 }
 
 export default async function PartnerPage({ params }: Props) {
-  const partner = getPartner((await params).slug)
+  const partner = await getPartner((await params).slug)
   if (!partner) notFound()
+  const [products, partners] = await Promise.all([getProducts(), getPartners()])
   const devices = products.filter((p) => p.partner === partner.slug)
   const others = partners.filter((p) => p.slug !== partner.slug)
 
@@ -41,8 +43,8 @@ export default async function PartnerPage({ params }: Props) {
 
       <section className="section">
         <div className="container-page">
-          <h2 className="mb-8 text-2xl font-bold md:text-3xl">Devices</h2>
-          <DeviceGrid products={devices} />
+          <h2 className="mb-8 text-2xl font-bold md:text-3xl">Products</h2>
+          <PartnerProducts products={devices} partnerName={partner.name} />
         </div>
       </section>
 

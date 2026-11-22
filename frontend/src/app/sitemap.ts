@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next'
 
-import { partners } from '@/data/partners'
-import { products } from '@/data/products'
+import { getPartners, getProducts } from '@/lib/content'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 3600
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [partners, products] = await Promise.all([getPartners(), getProducts()])
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
   const pages = ['', '/solutions', '/management-platforms', '/products', '/partners', '/about', '/contact', '/request-a-demo', '/privacy-policy']
   return [

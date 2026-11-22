@@ -41,7 +41,7 @@ export function WhyUsStrip() {
   return (
     <section className="section bg-lav">
       <div className="container-page">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs font-semibold tracking-[0.2em] text-purple uppercase">Why Danksradar</p>
             <h2 className="mt-2 text-3xl font-bold md:text-4xl">Fleet headaches? Sorted.</h2>
@@ -51,7 +51,7 @@ export function WhyUsStrip() {
               type="button"
               onClick={() => go(index - 1)}
               aria-label="Previous"
-              className="grid h-11 w-11 place-items-center rounded-full border-2 border-purple text-purple transition hover:bg-purple hover:text-white"
+              className="grid h-11 w-11 place-items-center rounded-full border-2 border-purple text-purple btn-fun hover:bg-purple hover:text-white"
             >
               ←
             </button>
@@ -59,7 +59,7 @@ export function WhyUsStrip() {
               type="button"
               onClick={() => go(index + 1)}
               aria-label="Next"
-              className="grid h-11 w-11 place-items-center rounded-full bg-purple text-white transition hover:bg-electric"
+              className="grid h-11 w-11 place-items-center rounded-full bg-purple text-white btn-fun hover:bg-electric"
             >
               →
             </button>

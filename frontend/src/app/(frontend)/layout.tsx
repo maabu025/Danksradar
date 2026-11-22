@@ -4,6 +4,9 @@ import type { ReactNode } from 'react'
 
 import { Footer } from '@/components/layout/Footer'
 import { Navbar } from '@/components/layout/Navbar'
+import { ScrollProgress } from '@/components/fx/ScrollProgress'
+import { ScrollReveal } from '@/components/fx/ScrollReveal'
+import { HoverSpotlight } from '@/components/layout/HoverSpotlight'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
 import { site } from '@/data/site'
 
@@ -26,7 +29,13 @@ export const metadata: Metadata = {
   title: { default: `${site.name} | Fleet tracking & telematics in Ghana`, template: `%s | ${site.name}` },
   description: site.description,
   openGraph: { siteName: site.name, type: 'website', locale: 'en_GH' },
-  icons: { icon: '/favicon.ico' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function FrontendLayout({ children }: { children: ReactNode }) {
@@ -40,6 +49,9 @@ export default function FrontendLayout({ children }: { children: ReactNode }) {
         <main id="main">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <HoverSpotlight />
+        <ScrollReveal />
+        <ScrollProgress />
       </body>
     </html>
   )

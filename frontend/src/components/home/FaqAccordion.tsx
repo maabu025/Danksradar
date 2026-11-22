@@ -13,10 +13,10 @@ export function FaqAccordion() {
           <h2 className="mt-2 mb-8 text-3xl font-bold md:text-4xl">Questions, answered.</h2>
           <div className="divide-y divide-lav rounded-2xl border border-lav">
             {faqs.map((f) => (
-              <details key={f.question} className="group px-6 py-5">
+              <details key={f.question} className="group px-6 py-5 transition-colors hover:bg-lav/50">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
                   {f.question}
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-lav text-purple transition group-open:rotate-45" aria-hidden>
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-lav text-purple transition group-hover:scale-110 group-hover:bg-purple group-hover:text-white group-open:rotate-45" aria-hidden>
                     +
                   </span>
                 </summary>

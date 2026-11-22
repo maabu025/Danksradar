@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 
 import { HeroSlideshow } from '@/components/home/HeroSlideshow'
 import { ProductCatalog } from '@/components/products/ProductCatalog'
-import { products } from '@/data/products'
+import { getPartners, getProducts } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Products & Services',
@@ -15,7 +15,10 @@ const slides = [
   { tagline: 'Hardware and software that work together.', alt: 'Tracker connected to the fleet platform and phone app', image: '/images/hero/prod2.jpg' },
 ]
 
-export default function ProductsPage() {
+export const revalidate = 60
+
+export default async function ProductsPage() {
+  const [products, partners] = await Promise.all([getProducts(), getPartners()])
   return (
     <>
       <HeroSlideshow slides={slides} />
@@ -24,7 +27,7 @@ export default function ProductsPage() {
           <h2 className="mb-8 text-3xl font-bold md:text-4xl">Products &amp; Services</h2>
           {/* Suspense is needed because the filters read the address bar */}
           <Suspense>
-            <ProductCatalog products={products} />
+            <ProductCatalog products={products} partners={partners} />
           </Suspense>
         </div>
       </section>

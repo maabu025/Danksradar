@@ -12,6 +12,8 @@ export type Slide = {
   video?: string
   /** Still image shown while the video loads */
   poster?: string
+  /** How long this slide stays, in seconds (e.g. the video's length). Defaults to the slideshow interval. */
+  duration?: number
 }
 
 type Props = {
@@ -29,9 +31,10 @@ export function HeroSlideshow({ slides, interval = 8000, fullScreen = false }: P
 
   useEffect(() => {
     if (paused || slides.length < 2) return
-    const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), interval)
-    return () => clearInterval(t)
-  }, [paused, slides.length, interval])
+    const ms = slides[index]?.duration ? slides[index].duration! * 1000 : interval
+    const t = setTimeout(() => setIndex((i) => (i + 1) % slides.length), ms)
+    return () => clearTimeout(t)
+  }, [paused, slides, index, interval])
 
   // play only the visible slide's video, from the start
   useEffect(() => {
@@ -75,9 +78,19 @@ export function HeroSlideshow({ slides, interval = 8000, fullScreen = false }: P
               className="absolute inset-0 h-full w-full object-cover object-right"
             />
           ) : s.image ? (
-            <Image src={s.image} alt={s.alt} fill priority={i === 0} className="object-cover" sizes="100vw" />
+            <Image
+              src={s.image}
+              alt={s.alt}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className={`object-cover ${i === index ? 'animate-[kenburns_9s_ease-out_both]' : ''}`}
+            />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-electric via-purple to-deep" />
+            <div className="absolute inset-0 overflow-hidden bg-gradient-to-br from-electric via-purple to-deep">
+              <div className="absolute top-1/4 right-[15%] h-80 w-80 animate-[float-glow_9s_ease-in-out_infinite] rounded-full bg-white/20 blur-3xl" />
+              <div className="absolute right-[35%] bottom-10 h-64 w-64 animate-[float-glow_12s_ease-in-out_infinite_reverse] rounded-full bg-electric/40 blur-3xl" />
+            </div>
           )}
           {/* phones: darken the whole slide so the tagline stays readable; larger screens: fade from the left */}
           <div className="absolute inset-0 bg-deep/70 md:hidden" />
@@ -90,7 +103,16 @@ export function HeroSlideshow({ slides, interval = 8000, fullScreen = false }: P
                 fullScreen ? 'max-w-3xl text-5xl md:text-7xl' : 'max-w-3xl text-4xl md:text-6xl'
               }`}
             >
-              {s.tagline}
+              {/* each word rises in when its slide appears */}
+              {s.tagline.split(' ').map((word, w) => (
+                <span
+                  key={`${index}-${w}`}
+                  className={`inline-block ${i === index ? 'animate-[hero-word_.9s_cubic-bezier(.22,1,.36,1)_both]' : 'opacity-0'}`}
+                  style={{ animationDelay: `${200 + w * 90}ms` }}
+                >
+                  {word}&nbsp;
+                </span>
+              ))}
             </h1>
           </div>
         </div>

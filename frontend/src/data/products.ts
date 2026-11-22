@@ -1,11 +1,13 @@
 import type { Product, ProductCategory } from '@/types'
 
+import { devicePhotos } from './devicePhotos'
+
 export const categories: ProductCategory[] = ['GPS trackers', 'AI dashcams', 'Asset trackers', 'Fleet software']
 
 // Starter list. TODO: replace with the final product list and real photos from each partner.
 // The images in /public/images/products are illustrations: keep the same file names when you swap in real photos.
 // Once the admin panel is in use, products come from the database instead (see src/lib/content.ts).
-export const products: Product[] = [
+const productList: Product[] = [
   {
     slug: 'jimi-vl802',
     image: '/images/products/vl802.jpg',
@@ -60,6 +62,190 @@ export const products: Product[] = [
     summary: 'Long-battery tracker for trailers, containers and goods.',
     features: ['Long battery life', 'Magnetic mount', 'Movement alerts'],
   },
+  // More products per partner. TODO: confirm models and wording with each partner / sales before launch.
+  {
+    slug: 'jimi-vl103m',
+    image: '/images/products/vl802.jpg',
+    name: 'Jimi IoT VL103M',
+    partner: 'jimi-iot',
+    category: 'GPS trackers',
+    summary: 'Compact 4G tracker for cars, vans and motorbikes.',
+    features: ['4G connectivity', 'Live tracking', 'Easy installation'],
+  },
+  {
+    slug: 'jimi-gt06n',
+    image: '/images/products/vl802.jpg',
+    name: 'Jimi IoT GT06N',
+    partner: 'jimi-iot',
+    category: 'GPS trackers',
+    summary: 'Simple, wired vehicle tracker for everyday fleets.',
+    features: ['Live tracking', 'Engine cut-off', 'Geofence alerts'],
+  },
+  {
+    slug: 'jimi-jc450',
+    image: '/images/products/jc400.jpg',
+    name: 'Jimi IoT JC450',
+    partner: 'jimi-iot',
+    category: 'AI dashcams',
+    summary: '4G video telematics camera for road and cabin.',
+    features: ['Live video', 'Event recording', 'Driver alerts'],
+  },
+  {
+    slug: 'jimi-jc170',
+    image: '/images/products/jc400.jpg',
+    name: 'Jimi IoT JC170',
+    partner: 'jimi-iot',
+    category: 'AI dashcams',
+    summary: 'AI driver-monitoring camera. Pairs with the VL802 tracker.',
+    features: ['Fatigue detection', 'Phone-use and smoking alerts', 'Distraction alerts', 'Works with VL802'],
+  },
+  {
+    slug: 'jimi-jc181',
+    image: '/images/products/jc400.jpg',
+    name: 'Jimi IoT JC181',
+    partner: 'jimi-iot',
+    category: 'AI dashcams',
+    summary: 'Connected dashcam for small and growing fleets.',
+    features: ['Live video', 'Event clips', 'GPS location'],
+  },
+  {
+    slug: 'jimi-at4',
+    image: '/images/products/asset.jpg',
+    name: 'Jimi IoT AT4',
+    partner: 'jimi-iot',
+    category: 'Asset trackers',
+    summary: 'Battery tracker with magnet mount for trailers and cargo.',
+    features: ['Long battery life', 'Magnetic mount', 'Movement alerts'],
+  },
+  {
+    slug: 'jimi-tracksolid-pro',
+    image: '/images/products/targa.jpg',
+    name: 'Tracksolid Pro',
+    partner: 'jimi-iot',
+    category: 'Fleet software',
+    summary: 'Web and mobile platform for Jimi IoT devices.',
+    features: ['Live map', 'Video playback', 'Reports and alerts'],
+  },
+  {
+    slug: 'teltonika-fmb920',
+    image: '/images/products/vl802.jpg',
+    name: 'Teltonika FMB920',
+    partner: 'teltonika',
+    category: 'GPS trackers',
+    summary: 'Small, reliable tracker for cars and light vehicles.',
+    features: ['Live tracking', 'Internal antennas', 'Backup battery'],
+  },
+  {
+    slug: 'teltonika-fmb120',
+    image: '/images/products/vl802.jpg',
+    name: 'Teltonika FMB120',
+    partner: 'teltonika',
+    category: 'GPS trackers',
+    summary: 'Tracker with inputs for sensors and accessories.',
+    features: ['Digital and analogue inputs', 'Live tracking', 'Backup battery'],
+  },
+  {
+    slug: 'teltonika-fmc003',
+    image: '/images/products/vl802.jpg',
+    name: 'Teltonika FMC003',
+    partner: 'teltonika',
+    category: 'GPS trackers',
+    summary: 'Plug-and-play 4G tracker for the OBD port.',
+    features: ['Plugs into OBD port', '4G connectivity', 'Vehicle data'],
+  },
+  {
+    slug: 'teltonika-tat100',
+    image: '/images/products/asset.jpg',
+    name: 'Teltonika TAT100',
+    partner: 'teltonika',
+    category: 'Asset trackers',
+    summary: 'Battery-powered tracker for trailers and equipment.',
+    features: ['Long battery life', 'Rugged case', 'Movement alerts'],
+  },
+  {
+    slug: 'teltonika-dualcam',
+    image: '/images/products/jc400.jpg',
+    name: 'Teltonika DualCam',
+    partner: 'teltonika',
+    category: 'AI dashcams',
+    summary: 'Road and cabin camera that adds video to Teltonika trackers.',
+    features: ['Road and cabin view', 'Event photos and video', 'Works with Teltonika trackers'],
+  },
+  {
+    slug: 'lytx-drivecam-sf300',
+    image: '/images/products/jc400.jpg',
+    name: 'Lytx DriveCam SF300',
+    partner: 'lytx',
+    category: 'AI dashcams',
+    summary: 'Event recorder that captures risky driving moments.',
+    features: ['Event recording', 'Driver coaching', 'In-cab alerts'],
+  },
+  {
+    slug: 'lytx-surfsight-ai12',
+    image: '/images/products/jc400.jpg',
+    name: 'Lytx Surfsight AI-12',
+    partner: 'lytx',
+    category: 'AI dashcams',
+    summary: 'AI dashcam with road and cabin cameras.',
+    features: ['AI risk detection', 'Road and cabin view', 'Live video'],
+  },
+  {
+    slug: 'lytx-driver-safety',
+    image: '/images/products/targa.jpg',
+    name: 'Lytx driver safety program',
+    partner: 'lytx',
+    category: 'Fleet software',
+    summary: 'Coaching tools and safety scores built on DriveCam video.',
+    features: ['Safety scores', 'Coaching workflow', 'Risk reports'],
+  },
+  {
+    slug: 'lytx-fleet-tracking',
+    image: '/images/products/targa.jpg',
+    name: 'Lytx fleet tracking',
+    partner: 'lytx',
+    category: 'Fleet software',
+    summary: 'GPS tracking and fleet reports alongside video safety.',
+    features: ['Live map', 'Trip history', 'Fleet reports'],
+  },
+  {
+    slug: 'targa-insurance-telematics',
+    image: '/images/products/targa.jpg',
+    name: 'Targa insurance telematics',
+    partner: 'targa-telematics',
+    category: 'Fleet software',
+    summary: 'Driving data and crash detection for insurers.',
+    features: ['Driver scoring', 'Crash detection', 'Claims support'],
+  },
+  {
+    slug: 'targa-connected-car',
+    image: '/images/products/targa.jpg',
+    name: 'Targa connected car',
+    partner: 'targa-telematics',
+    category: 'Fleet software',
+    summary: 'Connected-vehicle services for rental and leasing fleets.',
+    features: ['Remote vehicle data', 'Usage reports', 'Maintenance alerts'],
+  },
+  {
+    slug: 'targa-vehicle-tracker',
+    image: '/images/products/vl802.jpg',
+    name: 'Targa vehicle tracker',
+    partner: 'targa-telematics',
+    category: 'GPS trackers',
+    summary: 'Tracking unit that feeds the Targa platform.',
+    features: ['Live tracking', 'Trip history', 'Theft alerts'],
+  },
+  {
+    slug: 'targa-asset-tracker',
+    image: '/images/products/asset.jpg',
+    name: 'Targa asset tracker',
+    partner: 'targa-telematics',
+    category: 'Asset trackers',
+    summary: 'Battery tracker for trailers, containers and equipment.',
+    features: ['Long battery life', 'Location alerts', 'Easy mounting'],
+  },
 ]
+
+// Adds the real device photo wherever one is listed in devicePhotos.ts
+export const products: Product[] = productList.map((p) => ({ ...p, photo: devicePhotos[p.slug] }))
 
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug)

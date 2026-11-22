@@ -2,7 +2,7 @@ type Props = { eyebrow?: string; title: string; text?: string; center?: boolean;
 
 export function SectionHeader({ eyebrow, title, text, center, light }: Props) {
   return (
-    <div className={`mb-10 max-w-2xl ${center ? 'mx-auto text-center' : ''}`}>
+    <div className={`mb-8 max-w-4xl ${center ? 'mx-auto text-center' : ''}`}>
       {eyebrow && (
         <p className={`mb-2 text-xs font-semibold tracking-[0.2em] uppercase ${light ? 'text-lav' : 'text-purple'}`}>
           {eyebrow}

@@ -71,7 +71,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={`rounded-full px-3 py-2 text-sm font-medium transition ${
+                  className={`link-fun rounded-full px-3 py-2 text-sm font-medium transition ${
                     overHero
                       ? isActive(item.href)
                         ? 'text-white'
@@ -116,7 +116,7 @@ export function Navbar() {
                         <ul className="space-y-2">
                           {col.links.map((l) => (
                             <li key={l.href}>
-                              <Link href={l.href} className="block text-sm whitespace-nowrap text-deep hover:text-purple">
+                              <Link href={l.href} className="link-slide text-sm whitespace-nowrap text-deep hover:text-purple">
                                 {l.label}
                               </Link>
                             </li>

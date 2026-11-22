@@ -10,8 +10,9 @@ const styles: Record<Variant, string> = {
   light: 'bg-white text-deep hover:bg-lav',
 }
 
+// every button lifts slightly and glows on hover, and presses down on click
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric disabled:opacity-60'
+  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold btn-fun focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric disabled:pointer-events-none disabled:opacity-60'
 
 type LinkProps = { href: string; variant?: Variant; className?: string; children: ReactNode }
 

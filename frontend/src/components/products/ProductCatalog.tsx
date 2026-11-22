@@ -3,14 +3,13 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
-import { partners } from '@/data/partners'
 import { categories } from '@/data/products'
-import type { Product } from '@/types'
+import type { Partner, Product } from '@/types'
 
 import { ProductCard } from './ProductCard'
 
 /** Search bar + partner filter + category filter side by side, then the product grid */
-export function ProductCatalog({ products }: { products: Product[] }) {
+export function ProductCatalog({ products, partners }: { products: Product[]; partners: Partner[] }) {
   const params = useSearchParams()
   const router = useRouter()
   const [query, setQuery] = useState('')
@@ -35,11 +34,11 @@ export function ProductCatalog({ products }: { products: Product[] }) {
   }, [products, query, partner, category])
 
   const control =
-    'h-12 rounded-full border border-deep/15 bg-white px-5 text-sm outline-none focus:border-purple focus:ring-2 focus:ring-electric/30'
+    'h-12 rounded-full border border-deep/15 bg-white px-5 text-sm outline-none transition hover:border-electric focus:border-purple focus:ring-2 focus:ring-electric/30'
 
   return (
     <>
-      <div className="mb-10 grid gap-3 md:grid-cols-[2fr_1fr_1fr]">
+      <div className="mb-8 grid gap-3 md:grid-cols-[2fr_1fr_1fr]">
         <input
           type="search"
           placeholder="Search products"
@@ -71,7 +70,7 @@ export function ProductCatalog({ products }: { products: Product[] }) {
       </p>
 
       {shown.length ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {shown.map((p) => (
             <ProductCard key={p.slug} product={p} />
           ))}

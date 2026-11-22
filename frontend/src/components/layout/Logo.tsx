@@ -5,7 +5,7 @@ type Props = { onDark?: boolean; className?: string }
 
 export function Logo({ onDark = false, className = '' }: Props) {
   return (
-    <Link href="/" aria-label="Danksradar home" className={`inline-flex shrink-0 ${className}`}>
+    <Link href="/" aria-label="Danksradar home" className={`inline-flex shrink-0 transition-transform duration-300 hover:scale-105 ${className}`}>
       <Image
         src={onDark ? '/logos/danksradar-logo-on-dark.png' : '/logos/danksradar-logo-on-white.png'}
         alt="Danksradar"

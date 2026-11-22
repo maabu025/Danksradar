@@ -4,25 +4,26 @@ import { notFound } from 'next/navigation'
 
 import { QuoteRequestForm } from '@/components/forms/QuoteRequestForm'
 import { ProductCard } from '@/components/products/ProductCard'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
-import { getPartner } from '@/data/partners'
-import { getProduct, products } from '@/data/products'
+import { ProductImage } from '@/components/products/ProductImage'
+import { getPartner, getProduct, getProducts } from '@/lib/content'
 
 type Props = { params: Promise<{ slug: string }> }
 
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }))
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  return (await getProducts()).map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = getProduct((await params).slug)
+  const product = await getProduct((await params).slug)
   return product ? { title: product.name, description: product.summary } : {}
 }
 
 export default async function ProductDetailsPage({ params }: Props) {
-  const product = getProduct((await params).slug)
+  const product = await getProduct((await params).slug)
   if (!product) notFound()
-  const partner = getPartner(product.partner)
+  const [partner, products] = await Promise.all([getPartner(product.partner), getProducts()])
   const related = products.filter((p) => p.slug !== product.slug && p.category === product.category).slice(0, 3)
 
   return (
@@ -38,7 +39,7 @@ export default async function ProductDetailsPage({ params }: Props) {
 
           <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
             <div>
-              <ImagePlaceholder src={product.image} alt={product.name} className="h-80 md:h-[420px]" />
+              <ProductImage product={product} className="h-80 md:h-[420px]" sizes="(max-width: 768px) 100vw, 800px" />
               <div className="mt-8">
                 <div className="flex flex-wrap gap-2 text-xs">
                   <span className="rounded-full bg-lav px-3 py-1 font-semibold text-purple">{product.category}</span>
@@ -73,7 +74,7 @@ export default async function ProductDetailsPage({ params }: Props) {
         <section className="section bg-lav">
           <div className="container-page">
             <h2 className="mb-8 text-2xl font-bold">Similar products</h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {related.map((p) => (
                 <ProductCard key={p.slug} product={p} />
               ))}

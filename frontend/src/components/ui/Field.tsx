@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 
 const inputClass =
-  'w-full rounded-xl border border-deep/15 bg-white px-4 py-3 text-sm text-deep outline-none transition focus:border-purple focus:ring-2 focus:ring-electric/30'
+  'w-full rounded-xl border border-deep/15 bg-white px-4 py-3 text-sm text-deep outline-none transition hover:border-electric focus:border-purple focus:ring-2 focus:ring-electric/30'
 
 type Common = { label: string; name: string; error?: string; required?: boolean }
 
